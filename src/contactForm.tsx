@@ -17,6 +17,9 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
+const helpMessage =
+  'Please fill the fields bellow and press on the "Send Message" button :)';
+
 export default function ContactForm() {
   const [form, setForm] = useState({
     name: '',
@@ -204,7 +207,7 @@ export default function ContactForm() {
         <Heading color={'green.400'} fontSize={'5xl'}>
           Contact me
         </Heading>
-
+        <Text>{helpMessage}</Text>
         <SimpleGrid columns={{ base: 1, md: 1 }}>
           <VStack w={'full'}>
             {submit.show && submit.formStatus === 'ko' && (
@@ -353,7 +356,7 @@ export default function ContactForm() {
                   disabled={isReadOnly()}
                   type={'submit'}
                   variant="solid"
-                  bg={!isFormValid() ? 'gray.400' : 'green.400'}
+                  bg={!isFormValid() || isReadOnly() ? 'gray.400' : 'green.400'}
                   mt={4}
                   size={'lg'}
                   fontSize={'3xl'}
@@ -361,7 +364,8 @@ export default function ContactForm() {
                   py={'40px'}
                   color="white"
                   _hover={{
-                    backgroundColor: !isFormValid() ? 'gray.500' : 'green.500',
+                    backgroundColor:
+                      !isFormValid() || isReadOnly() ? 'gray.500' : 'green.500',
                   }}
                 >
                   Send Message
